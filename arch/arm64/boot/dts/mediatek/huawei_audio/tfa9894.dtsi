@@ -1,0 +1,14 @@
+&i2c6 {
+    tfa9894_smartpa_up_r:smartpa@35 {
+        compatible = "nxp,tfa9894";
+        reg = <0x35>;
+        reset-gpio = <&pio 173 0>;
+        irq-gpio = <&pio 7 0>;
+        status = "ok";
+        };
+};
+
+&smartpakit {
+    chip_vendor = <1>;
+    chip_model = "tfa9894";
+};

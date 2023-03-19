@@ -1,0 +1,8 @@
+#
+# Misc strange devices
+#
+config TFA9894
+	bool "nxp TFA9894 smartpa misc driver"
+    default n
+
+

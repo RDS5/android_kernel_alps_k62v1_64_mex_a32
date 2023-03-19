@@ -1,0 +1,119 @@
+&i2c5 {
+	eta6937@6A {
+		status = "okay";
+		compatible = "eta,eta6937";
+		reg = <0x6A>;
+
+		/*ti,charging-disabled;*/
+		ti,eta6937,enable-term;
+
+		ti,eta6937,current-sensor-mohm = <68>;
+		ti,eta6937,charge-voltage = <4400>;
+		ti,eta6937,charge-current = <500>;
+		ti,eta6937,input-current-limit = <500>;/*iin-lim, 0 means no limit*/
+		ti,eta6937,input-voltage-limit = <4500>;/*vindpm threshold*/
+		ti,eta6937,vbatlow-volt = <3500>;
+		ti,eta6937,term-current = <150>;
+		ti,eta6937,safety-max-charge-current = <1250>;
+		ti,eta6937,safety-max-charge-voltage = <4400>;
+	};
+};
+
+&charger {
+	ac_charger_current = <1250000>;
+	ac_charger_input_current = <1250000>;
+	non_std_ac_charger_current = <1200000>;
+	dpm_enable;
+	power_path_disable;
+	jeita_ibus_limit_en;
+	battery_cv = <4380000>;
+	iterm = <150000>;
+	jeita_temp_t3_to_t4_cur = <850000>;
+	jeita_temp_t2_to_t3_cur = <1250000>;
+	jeita_temp_t1_to_t2_cur = <876000>;
+	jeita_temp_t0_to_t1_cur = <500000>;
+	vdpm_buf_limit = <100>;
+	vdpm_para =
+			"-32767", "4000", "4200", "50",
+			"4000", "4200", "4400", "50",
+			"4200", "32767", "4600", "50";
+	charge_full_design = <3020000>;
+};
+
+&huawei_charger {
+	compatible = "huawei,charger";
+	status = "okay";
+};
+
+&huawei_battery {
+	compatible = "huawei,battery";
+	voltage_max_design = <4400000>;
+	status = "okay";
+};
+
+&lk_charger{
+	ac_charger_current = <1050000>;
+	ac_charger_input_current = <1050000>;
+	non_std_ac_charger_current = <1050000>;
+	power_path_disable;
+	r_charger_1 = <300>;
+};
+
+&mt6370_pmu{
+	charger {
+		status = "disabled";
+	};
+};
+
+&otg_iddig {
+	interrupt-parent = <&pio>;
+	interrupts = <41 IRQ_TYPE_LEVEL_LOW 41 0>;
+	/* configured by default,should confirm with HW if open */
+	otg_bigcurr_disable;
+	status = "okay";
+};
+
+&bat_gm30 {
+	bat_para =
+			"xinwangda", "590000", "690000",
+			"desay", "250000", "350000",
+			"feimaotui", "400000", "510000";
+	batt_id_channel = <4>;
+	min_fcc = <2100000>;
+	max_fcc = <3020000>;
+	rbat_pull_up_r = <16900>;
+	vbus_r_charger_1 = <300>;
+	dlpt_optimization;
+
+	batt_temperature_table_num = <21>;
+	batt_temperature_table = <
+			(-40)   205200
+			(-35)   154800
+			(-30)   117900
+			(-25)   90690
+			(-20)   70370
+			(-15)   55070
+			(-10)   43440
+			(-5)    34530
+			0       27640
+			5       22270
+			10      18060
+			15      14740
+			20      12110
+			25      10000
+			30      8309
+			35      6941
+			40      5828
+			45      4916
+			50      4165
+			55      3543
+			60      3027 >;
+
+	#include "../sunwoda_4v40_3000mah_ext.dtsi"
+	#include "../desay_4v40_3000mah_ext.dtsi"
+	#include "../scud_atl_4v40_3000mah_ext.dtsi"
+};
+
+&usb_phy_tuning {
+	status = "okay";
+};

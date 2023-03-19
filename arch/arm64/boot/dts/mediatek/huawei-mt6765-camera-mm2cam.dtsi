@@ -1,0 +1,5 @@
+/* Camera start */
+#include "huawei-mt6765-camera-mm.dtsi"
+&product_name_camera {
+	product-name = "Merida2Cam";
+};

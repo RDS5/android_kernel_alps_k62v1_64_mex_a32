@@ -1,0 +1,5 @@
+config NFC_CHIP_NXP
+	tristate "PN547 NFC driver"
+	depends on I2C
+	help
+	  NXP PN547 driver.

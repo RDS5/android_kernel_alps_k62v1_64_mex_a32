@@ -1,0 +1,5 @@
+&huawei_scp_info {
+	compatible = "huawei,huawei_scp_info";
+	product_number = <4>;
+	status = "okay";
+};

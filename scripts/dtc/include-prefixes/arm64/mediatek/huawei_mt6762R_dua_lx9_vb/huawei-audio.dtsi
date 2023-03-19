@@ -1,0 +1,136 @@
+/* AUDIO GPIO standardization */
+&audgpio {
+    pinctrl-names = "aud_clk_mosi_off",
+            "aud_clk_mosi_on",
+            "aud_clk_miso_off",
+            "aud_clk_miso_on",
+            "aud_dat_mosi_off",
+            "aud_dat_mosi_on",
+            "aud_dat_miso_off",
+            "aud_dat_miso_on";
+    pinctrl-0 = <&aud_clk_mosi_off>;
+    pinctrl-1 = <&aud_clk_mosi_on>;
+    pinctrl-2 = <&aud_clk_miso_off>;
+    pinctrl-3 = <&aud_clk_miso_on>;
+    pinctrl-4 = <&aud_dat_mosi_off>;
+    pinctrl-5 = <&aud_dat_mosi_on>;
+    pinctrl-6 = <&aud_dat_miso_off>;
+    pinctrl-7 = <&aud_dat_miso_on>;
+    status = "okay";
+};
+
+&pio {
+    aud_clk_mosi_off: aud_clk_mosi_off {
+        pins_cmd0_dat {
+            pinmux = <PINMUX_GPIO136__FUNC_GPIO136>;
+        };
+    };
+
+    aud_clk_mosi_on: aud_clk_mosi_on {
+        pins_cmd0_dat {
+           pinmux = <PINMUX_GPIO136__FUNC_AUD_CLK_MOSI>;
+       };
+   };
+
+   aud_clk_miso_off: aud_clk_miso_off {
+       pins_cmd0_dat {
+           pinmux = <PINMUX_GPIO140__FUNC_GPIO140>;
+       };
+   };
+
+   aud_clk_miso_on: aud_clk_miso_on {
+       pins_cmd0_dat {
+           pinmux = <PINMUX_GPIO140__FUNC_AUD_CLK_MISO>;
+       };
+   };
+
+   aud_dat_mosi_off: aud_dat_mosi_off {
+       pins_cmd1_dat {
+           pinmux = <PINMUX_GPIO138__FUNC_GPIO138>;
+           input-enable;
+           slew-rate = <0>;
+           bias-disable;
+       };
+       pins_cmd2_dat {
+           pinmux = <PINMUX_GPIO139__FUNC_GPIO139>;
+           input-enable;
+           slew-rate = <0>;
+           bias-disable;
+       };
+   };
+    aud_dat_mosi_on: aud_dat_mosi_on {
+        pins_cmd1_dat {
+            pinmux = <PINMUX_GPIO138__FUNC_AUD_DAT_MOSI0>;
+        };
+        pins_cmd2_dat {
+            pinmux = <PINMUX_GPIO139__FUNC_AUD_DAT_MOSI1>;
+        };
+    };
+
+    aud_dat_miso_off: aud_dat_miso_off {
+        pins_cmd1_dat {
+            pinmux = <PINMUX_GPIO142__FUNC_GPIO142>;
+            input-enable;
+            slew-rate = <0>;
+            bias-disable;
+        };
+        pins_cmd2_dat {
+            pinmux = <PINMUX_GPIO143__FUNC_GPIO143>;
+            input-enable;
+            slew-rate = <0>;
+            bias-disable;
+        };
+    };
+
+    aud_dat_miso_on: aud_dat_miso_on {
+        pins_cmd1_dat {
+            pinmux = <PINMUX_GPIO142__FUNC_AUD_DAT_MISO0>;
+        };
+        pins_cmd2_dat {
+            pinmux = <PINMUX_GPIO143__FUNC_AUD_DAT_MISO1>;
+        };
+    };
+};
+/* AUDIO GPIO END */
+
+&mt_soc_codec_name {
+    simple-pa-gpio-enale = <&pio 153 0>; /* GPIO153, gpionum is 329 + 153 = 482 */
+    use_two_in_one_speaker = <0>; /* select 1: use, 0: not use */
+};
+
+&audio_hw_config {
+    audio_param_path = "odm/etc/audio/audio_param_aw87328";
+    audio_param_ce_path = "odm/etc/audio/audio_param_ce_aw87328";
+};
+
+/* accdet start */
+&accdet {
+    accdet-mic-vol = <6>;
+    headset-mode-setting = <0x500 0x500 1 0x1f0 0x800 0x800 0x20 0x44>;
+    accdet-plugout-debounce = <1>;
+    accdet-mic-mode = <1>;
+    headset-eint-level-pol = <8>;
+    headset-three-key-threshold = <0 80 220 400>;
+    headset-three-key-threshold-CDD = <0 121 192 600>;
+    headset-four-key-threshold = <0 58 121 192 400>;
+    pinctrl-names = "default", "state_eint_as_int";
+    pinctrl-0 = <&accdet_pins_default>;
+    pinctrl-1 = <&accdet_pins_eint_as_int>;
+    status = "okay";
+};
+&pio {
+    accdet_pins_default: accdetdefault {
+    };
+    accdet_pins_eint_as_int: accdeteint@0 {
+        pins_cmd_dat {
+            pinmux = <PINMUX_GPIO9__FUNC_GPIO9>;
+            slew-rate = <0>;
+            bias-disable;
+        };
+    };
+};
+/* accdet end */
+
+&smartpakit {
+    status = "disabled";
+};

@@ -1,0 +1,75 @@
+#include "../lcdkit3.0/med/devkit_lcd_kit.dtsi"
+
+&huawei_lcd_panel {
+		compatible = "huawei,lcd_panel_type";
+		product_id = <1003>;
+		detect_type = <2>; /*0:DETECT_GPIOID  1:DETECT_CHIPID  2:DETECT_LCD_TYPE */
+		gpio_id = <169 178>; /*ID0 ID1*/
+		support_lcd_type = "LCD_KIT";
+		iovcc_ctrl_mode = <1>;
+};
+
+/* DISPSYS GPIO standardization */
+&pio {
+	mtkfb_pins_lcm_reset0: lcm_rst_out0_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO45__FUNC_GPIO45>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+
+	mtkfb_pins_lcm_reset1: lcm_rst_out1_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO45__FUNC_GPIO45>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+};
+
+&mtkfb {
+	pinctrl-names = "lcm_rst_out0_gpio", "lcm_rst_out1_gpio";
+	pinctrl-0 = <&mtkfb_pins_lcm_reset0>;
+	pinctrl-1 = <&mtkfb_pins_lcm_reset1>;
+	status = "okay";
+};
+
+&i2c6{
+	tps65132@3e {
+		compatible = "ti,tps65132";
+		reg = <0x3e>;
+		tps65132_i2c_bus_id = <6>;
+		tps65132_support = <1>;
+	};
+
+	sgm37603a@36 {
+		compatible = "sgm,sgm37603a";
+		reg = <0x36>;
+		sgm37603a_i2c_bus_id = <6>;
+		sgm37603a_support = <1>;
+		sgm37603a_hw_enable = <1>;
+		sgm37603a_hw_en_gpio = <168>;
+		bl_on_lk_mdelay = <2>;
+		bl_level = <3440>;
+		sgm37603a_reg_brightness_conctrol = <0x05>;
+		sgm37603a_reg_lsb = <0x00>;
+		sgm37603a_reg_msb = <0x00>;
+		sgm37603a_reg_leds_config = <0x07>;
+	};
+
+	lm36923@36 {
+		compatible = "lm,lm36923";
+		reg = <0x36>;
+		lm36923_i2c_bus_id = <6>;
+		lm36923_support = <1>;
+		lm36923_hw_enable = <1>;
+		lm36923_hw_en_gpio = <168>;
+		bl_on_lk_mdelay = <0>;
+		bl_level = <1990>;
+		lm36923_reg_brightness_conctrol = <0x81>;
+		lm36923_reg_lsb = <0x00>;
+		lm36923_reg_msb = <0x00>;
+		lm36923_reg_leds_config = <0x07>;
+	};
+};

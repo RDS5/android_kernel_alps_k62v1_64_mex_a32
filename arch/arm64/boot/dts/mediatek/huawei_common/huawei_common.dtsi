@@ -1,0 +1,7 @@
+/***********************************************************************
+*********** This is common configuration for MTK platform **************
+***********************************************************************/
+
+#include "huawei_dev_detect/huawei_dev_detect.dtsi"
+#include "huawei_antenna_gpio_detect/huawei_antenna_gpio_detect.dtsi"
+#include "huawei_antenna_cable_detect/huawei_antenna_cable_detect.dtsi"

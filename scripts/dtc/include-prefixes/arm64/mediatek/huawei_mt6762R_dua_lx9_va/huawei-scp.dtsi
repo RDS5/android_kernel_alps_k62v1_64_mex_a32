@@ -1,0 +1,5 @@
+&huawei_scp_info {
+	compatible = "huawei,huawei_scp_info";
+	direction_number = <1>;
+	status = "okay";
+};

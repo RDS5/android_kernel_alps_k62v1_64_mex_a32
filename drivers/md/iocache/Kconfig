@@ -1,0 +1,14 @@
+
+config IOCACHE
+	default n
+	tristate "Volatile memory as cache"
+	help
+	Allows a block device to be used as cache for other devices; uses
+	a btree for indexing and the layout is optimized for SSDs.
+
+config HUAWEI_IOCACHE_DSM
+	default n
+	depends on IOCACHE
+	tristate "Iocache dmd"
+	help
+	huawei iocache log radar

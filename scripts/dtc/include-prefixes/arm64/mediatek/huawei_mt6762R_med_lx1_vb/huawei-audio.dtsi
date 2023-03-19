@@ -1,0 +1,6 @@
+#include "../huawei_audio/huawei_mt6735_accdet.dtsi"
+#include "../huawei_audio/huawei_mt676x_audio_gpio.dtsi"
+#include "../huawei_audio/cs35l41.dtsi"
+#include "../huawei_audio/tas2557.dtsi"
+#include "../huawei_audio/tfa9894.dtsi"
+#include "../huawei_audio/aw88195.dtsi"

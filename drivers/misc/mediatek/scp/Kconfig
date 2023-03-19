@@ -1,0 +1,17 @@
+config MTK_TINYSYS_SCP_SUPPORT
+	bool "Specify Interface Support SCP"
+	default n
+	help
+	  SCP is a MediaTek in-house DSP which can receive
+	  command from IPI interface.
+	  Set Y to enable this feature.
+	  If unsure,
+	  Set N to stay with legancy feature.
+config SENSOR_PARAM_TO_SCP
+	bool "Support for Send Sensor Param To SCP"
+	default n
+	help
+	  This open the feature Send Sensor Param
+	  to SCP from AP.
+	  Select Y if you have such device.
+	  If unsure select "N".

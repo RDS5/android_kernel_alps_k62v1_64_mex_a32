@@ -1,0 +1,217 @@
+&pio {
+        ctp_pins_eint_as_int: eint@0 {
+                pins_cmd_dat {
+                        pinmux = <PINMUX_GPIO0__FUNC_GPIO0>;
+                        slew-rate = <0>;
+                        bias-disable;
+                };
+        };
+        ctp_pins_eint_output0: eintoutput0 {
+                pins_cmd_dat {
+                        pinmux = <PINMUX_GPIO0__FUNC_GPIO0>;
+                        slew-rate = <1>;
+                        output-low;
+                };
+        };
+        ctp_pins_eint_output1: eintoutput1 {
+                pins_cmd_dat {
+                        pinmux = <PINMUX_GPIO0__FUNC_GPIO0>;
+                        slew-rate = <1>;
+                        output-high;
+                };
+        };
+        ctp_pins_rst_output0: rstoutput0 {
+                pins_cmd_dat {
+                        pinmux = <PINMUX_GPIO174__FUNC_GPIO174>;
+                        slew-rate = <1>;
+                        output-low;
+                };
+        };
+        ctp_pins_rst_output1: rstoutput1 {
+                pins_cmd_dat {
+                        pinmux = <PINMUX_GPIO174__FUNC_GPIO174>;
+                        slew-rate = <1>;
+                        output-high;
+                };
+        };
+};
+&ts_kit {
+	status = "okay";
+	compatible = "huawei,ts_kit";	/* Do not change value*/
+	bus_type = "i2c";
+	product = "durahms";
+	bus_id = <0>;
+	has_virtualkey = <0>;
+	debounce = <6 0>;
+	interrupt-parent = <&pio>;
+	interrupts = <0 2 0 0>;
+	aft_enable = <0>;		/* aft algo switch. 1 - enabel, 0 - disable*/
+	drv_stop_width = <0>;	/* always 0, can not config */
+	lcd_width = <0>;		/* always 0, can not config */
+	lcd_height = <0>;		/* always 0, can not config */
+	need_i2c_hwlock = <0>;	/* for i2c both used by ap and sensorhub */
+	register_charger_notifier = <0>;
+	hide_plain_id = <1>;
+
+	fts: touchscreen@38 {
+		compatible = "fts";
+
+		/* ts chip common config, parsed by paltform */
+		/* hardware config part */
+		slave_address = <0x38>;
+		irq_config = <3>;
+
+		/* base config */
+		projectid_len = <10>; /* default 10 */
+		ic_type = <2>; /* 0-FT8716 1-FT8607 2-FT5X46 */
+
+		/* input config part */
+		x_max = <720>;
+		y_max = <1440>;
+		x_max_mt = <720>;
+		y_max_mt = <1440>;
+		flip_x = <1>;
+		flip_y = <1>;
+		/* pinctl config part */
+		pinctrl-names = "state_eint_as_int", "state_eint_output0",
+			"state_eint_output1", "state_rst_output0", "state_rst_output1";
+		pinctrl-0 = <&ctp_pins_eint_as_int>;
+		pinctrl-1 = <&ctp_pins_eint_output0>;
+		pinctrl-2 = <&ctp_pins_eint_output1>;
+		pinctrl-3 = <&ctp_pins_rst_output0>;
+		pinctrl-4 = <&ctp_pins_rst_output1>;
+
+		/* feature config part */
+		parade,is_parade_solution = <0>;
+		parade,direct_proc_cmd = <0>;
+		parade,sleep_in_mode = <0>;
+		roi_supported = <1>;
+		roi_control_addr = <0x9b>;
+		glove_supported = <0>;
+		holster_supported = <0>;
+		pen_support = <0>;
+		support_3d_func = <0>;
+		charger_supported = <1>;
+		check_bulcked = <0>;
+		support_aft = <0>;
+		use_lcdkit_power_notify = <1>;
+		fp_tp_report_touch_minor_event = <0>;
+		algo_id = <1>; /* 0 - not use driver algo 1 - algo t1 */
+		need_wd_check_status = <1>;
+		check_status_watchdog_timeout = <3000>;
+		touch_switch_flag = <2>;
+		get_brightness_info_flag = <0>;
+		has_virtualkey = <0>;
+		lcd_full = <0>;
+		provide_panel_id_support = <1>;
+		chip_id = <0x54>;
+		hard_reset_delay = <200>;
+		erase_min_delay = <1350>;
+		calc_crc_delay = <300>;
+		reboot_delay = <300>;
+		erase_query_delay = <50>;
+		write_flash_query_times = <30>;
+		read_ecc_query_times = <100>;
+		erase_flash_query_times = <100>;
+		upgrade_loop_times = <5>;
+		pram_projectid_addr = <0xd7a0>;
+		rawdata_newformatflag = <1>;
+		fts,fw_only_depend_on_lcd = <0>;
+		fts,need_distinguish_lcd = <0>;
+		only_open_once_captest_threshold = <1>;
+		allow_print_fw_version = <1>;
+		allow_refresh_ic_type = <1>;
+		dura532600{
+			producer = "hlt";
+			compatible = "fts-dura532600";
+			row_column_delta_test = <0>;
+			lcd_noise_data_test = <1>;
+			threshold,point_by_point_judge = <1>;
+			row_column_delta_test_point_by_point = <1>;
+			threshold,in_csv_file = <1>;
+		};
+		dura442600{
+			producer = "hlt";
+			compatible = "fts-dura442600";
+			row_column_delta_test = <0>;
+			lcd_noise_data_test = <1>;
+			threshold,point_by_point_judge = <1>;
+			row_column_delta_test_point_by_point = <1>;
+			threshold,in_csv_file = <1>;
+		};
+		dura440200{
+			producer = "truly";
+			compatible = "fts-dura440200";
+			row_column_delta_test = <0>;
+			lcd_noise_data_test = <1>;
+			threshold,point_by_point_judge = <1>;
+			row_column_delta_test_point_by_point = <1>;
+			threshold,in_csv_file = <1>;
+		};
+		dura440201{
+			producer = "truly";
+			compatible = "fts-dura440201";
+			row_column_delta_test = <0>;
+			lcd_noise_data_test = <1>;
+			threshold,point_by_point_judge = <1>;
+			row_column_delta_test_point_by_point = <1>;
+			threshold,in_csv_file = <1>;
+		};
+	};
+	mstar_ts@26{
+		compatible = "mstar";
+		ic_type = <0xbf>;
+		algo_id = <1>;
+		slave_address = <0x26>;
+		//projectid_addr = <0x81a0>;
+		need_wd_check_status = <1>;
+		check_status_watchdog_timeout = <3000>;
+		mstar_irq_config = <3>;
+		x_max = <720>;
+		y_max = <1440>;
+		x_max_mt = <720>;
+		y_max_mt = <1440>;
+		power_self_ctrl = <0>;
+		/* pinctl config part */
+		pinctrl-names = "state_eint_as_int", "state_eint_output0",
+			"state_eint_output1", "state_rst_output0", "state_rst_output1";
+		pinctrl-0 = <&ctp_pins_eint_as_int>;
+		pinctrl-1 = <&ctp_pins_eint_output0>;
+		pinctrl-2 = <&ctp_pins_eint_output1>;
+		pinctrl-3 = <&ctp_pins_rst_output0>;
+		pinctrl-4 = <&ctp_pins_rst_output1>;
+
+		roi_supported = <1>;
+		unite_cap_test_interface = <1>;
+		report_rate_test =<0>;
+		fw_upgrade_delay = <10000>;
+		capacitance_test_config = <1>;
+		chip_id = <0xbf>;
+		write_flash_query_times = <30>;
+		read_ecc_query_times = <100>;
+		erase_flash_query_times = <15>;
+		upgrade_loop_times = <5>;
+		glove_switch_addr = <0xC0>;
+		mstar_mp_flow = <2>;
+		mstar_mp_retry = <3>;
+		rawdata_timeout = <10>;
+		mstar,product_id = "MSG2836A";
+		mstar,test-types = <0x80007>;/*test types*/
+		mstar,panel-max = <2048>;
+		mstar,panel-min = <2048>;
+		mstar,panel-deviation = <44000>;
+		mstar,key-max = <0>;
+		mstar,key-min = <0>;
+		mstar,key-nc = <0>;/*key test not check*/
+		support_get_tp_color = <0>;
+		gesture_supported = <0>;
+		dura292600_hjc {
+			producer = "hlt";
+			compatible = "mstar-dura292600";
+		};
+		dura292601_boe {
+			producer = "hlt";
+			compatible = "mstar-dura292601";
+		};
+	};
+};

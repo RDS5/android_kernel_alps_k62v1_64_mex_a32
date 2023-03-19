@@ -1,0 +1,11 @@
+&i2c3 {
+	sar@20 {
+		compatible = "abov,abov_sar";
+		status = "okay";
+		reg = <0x20>;
+		sar_int = <&pio 5 0x00>;
+		reg_array_len = <0x01>;
+		reg_array_val = <0x09 0x089>;
+		label = "AbovCapSense";
+	};
+};

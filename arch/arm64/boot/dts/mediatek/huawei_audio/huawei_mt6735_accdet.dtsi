@@ -1,0 +1,37 @@
+/* accdet start */
+&accdet {
+    accdet-mic-vol = <6>;
+    headset-mode-setting = <0x500 0x500 1 0x1f0 0x800 0x800 0x20 0x44>;
+    accdet-plugout-debounce = <1>;
+    accdet-mic-mode = <1>;
+    headset-eint-level-pol = <8>;
+    headset-three-key-threshold = <0 80 220 400>;
+    headset-three-key-threshold-CDD = <0 121 192 600>;
+    headset-four-key-threshold = <0 58 121 192 400>;
+    pinctrl-names = "default", "state_eint_as_int";
+    pinctrl-0 = <&accdet_pins_default>;
+    pinctrl-1 = <&accdet_pins_eint_as_int>;
+    status = "okay";
+    hs_auto_calib {
+            key_media_min_value = <0>;
+            key_media_max_value = <120>;
+            key_vol_up_min_value = <121>;
+            key_vol_up_max_value = <191>;
+            key_vol_down_min_value = <192>;
+            key_vol_down_max_value = <400>;
+            status = "ok";
+    };
+};
+&pio {
+    accdet_pins_default: accdetdefault {
+    };
+    accdet_pins_eint_as_int: accdeteint@0 {
+        pins_cmd_dat {
+            pinmux = <PINMUX_GPIO9__FUNC_GPIO9>;
+            slew-rate = <0>;
+            bias-disable;
+        };
+    };
+};
+/* accdet end */
+

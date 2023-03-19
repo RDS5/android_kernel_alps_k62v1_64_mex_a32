@@ -1,0 +1,18 @@
+menuconfig TAS2557
+	tristate "Texas Instruments TAS2557 SmartAmp(R)"
+
+if TAS2557
+
+config TAS2557_REGMAP
+    bool "Use of RegMap API"
+    default y
+
+config TAS2557_CODEC
+    bool "Codec Driver support"
+    default n
+
+config TAS2557_MISC
+    bool "Misc Driver support"
+    default y
+	
+endif # TAS2557

@@ -1,0 +1,19 @@
+&i2c3 {
+	nfc@28 {
+		compatible = "mediatek,nq-pn544";
+		status = "okay";
+		reg = <0x28>;
+		nxp,nfc_int = <&pio 10 0x00>;
+		nxp,nfc_ven = <&pio 152 0x00>;
+		nxp,nfc_firm = <&pio 9 0x00>;
+		nfc_nxp_conf_name = "libnfc-nxp.conf";
+		nfc_brcm_conf_name = "libnfc-brcm.conf";
+		nfc_card_num = <0x1>;
+		nfc_chip_type = "pn553";
+		nfc_single_channel = "true";
+	};
+};
+&nfc_exist {
+	nfc_exist_flag = "1";
+	status = "ok";
+};

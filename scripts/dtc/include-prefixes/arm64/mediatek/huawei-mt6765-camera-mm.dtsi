@@ -1,0 +1,341 @@
+/* Camera start */
+&mt_pmic_vldo28_ldo_reg {
+	regulator-min-microvolt = <3000000>;
+	regulator-max-microvolt = <3000000>;
+	regulator-default-on = <2>; /* 0:skip, 1: off, 2:on */
+	regulator-always-on;
+	regulator-boot-on;
+};
+
+&i2c2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <400000>;
+	mediatek,use-open-drain;
+	camera_main_mtk:camera_main@10 {
+		compatible = "mediatek,camera_main";
+		reg = <0x10>;
+		status = "okay";
+	};
+
+	camera_main_eeprom_mtk:camera_main_eeprom@50 {
+		compatible = "mediatek,camera_main_eeprom";
+		reg = <0x50>;
+		status = "okay";
+	};
+
+	camera_main_af_mtk:camera_main_af@0c {
+		compatible = "mediatek,camera_main_af";
+		reg = <0x0c>;
+		status = "okay";
+	};
+};
+
+&i2c4 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	clock-frequency = <400000>;
+	mediatek,use-open-drain;
+	camera_sub_mtk:camera_sub@36 {
+		compatible = "mediatek,camera_sub";
+		reg = <0x36>;
+		status = "okay";
+	};
+
+	camera_sub_eeprom_mtk:camera_sub_eeprom@52 {
+		compatible = "mediatek,camera_sub_eeprom";
+		reg = <0x52>;
+		status = "okay";
+	};
+
+	camera_main_two_mtk:camera_main_two@17 {
+		compatible = "mediatek,camera_main_two";
+		reg = <0x17>;
+		status = "okay";
+	};
+
+	camera_main_two_eeprom_mtk:camera_main_two_eeprom@50 {
+		compatible = "mediatek,camera_main_two_eeprom";
+		reg = <0x50>;
+		status = "okay";
+	};
+	camera_sub_two_mtk:camera_sub_two@22 {
+		compatible = "mediatek,camera_sub_two";
+		reg = <0x22>;
+		status = "okay";
+	};
+
+	camera_sub_two_eeprom_mtk:camera_sub_two_eeprom@55 {
+		compatible = "mediatek,camera_sub_two_eeprom";
+		reg = <0x55>;
+		status = "okay";
+	};
+};
+
+&pio {
+	camera_pins_cam0_mclk_on: camera_pins_cam0_mclk_on {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO99__FUNC_CMMCLK0>;
+		};
+	};
+	camera_pins_cam0_mclk_off: camera_pins_cam0_mclk_off {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO99__FUNC_GPIO99>;
+		};
+	};
+	camera_pins_cam1_mclk_on: camera_pins_cam1_mclk_on {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO100__FUNC_CMMCLK1>;
+		};
+	};
+	camera_pins_cam1_mclk_off: camera_pins_cam1_mclk_off {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO100__FUNC_GPIO100>;
+		};
+	};
+	camera_pins_cam2_mclk_on: camera_pins_cam2_mclk_on {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO108__FUNC_CMMCLK2>;
+		};
+	};
+	camera_pins_cam2_mclk_off: camera_pins_cam2_mclk_off {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO108__FUNC_GPIO108>;
+		};
+	};
+	camera_pins_cam3_mclk_on: camera_pins_cam3_mclk_on {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO108__FUNC_CMMCLK2>;
+		};
+	};
+	camera_pins_cam3_mclk_off: camera_pins_cam3_mclk_off {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO108__FUNC_GPIO108>;
+		};
+	};
+	camera_pins_cam0_rst0: cam0@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO101__FUNC_GPIO101>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	camera_pins_cam0_rst1: cam0@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO101__FUNC_GPIO101>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	camera_pins_cam1_rst0: cam1@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO102__FUNC_GPIO102>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	camera_pins_cam1_rst1: cam1@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO102__FUNC_GPIO102>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	camera_pins_cam2_rst0: cam2@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO109__FUNC_GPIO109>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	camera_pins_cam2_rst1: cam2@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO109__FUNC_GPIO109>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	camera_pins_cam2_pnd0: cam2@2 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO107__FUNC_GPIO107>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	camera_pins_cam2_pnd1: cam2@3 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO107__FUNC_GPIO107>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	camera_pins_cam3_rst0: cam3@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO87__FUNC_GPIO87>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	camera_pins_cam3_rst1: cam3@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO87__FUNC_GPIO87>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	camera_pins_default: camdefault {
+	};
+
+};
+
+/*
+ * cam0 back main camera; cam1 front camera;
+ * cam2 back aux camera; cam3 wide camera.
+ */
+&kd_camera_hw1 {
+	pinctrl-names = "default",
+			"cam0_rst0",
+			"cam0_rst1",
+			"cam1_rst0",
+			"cam1_rst1",
+			"cam2_rst0",
+			"cam2_rst1",
+			"cam2_pnd0",
+			"cam2_pnd1",
+			"cam3_rst0",
+			"cam3_rst1",
+			"cam0_mclk_on",
+			"cam0_mclk_off",
+			"cam1_mclk_on",
+			"cam1_mclk_off",
+			"cam2_mclk_on",
+			"cam2_mclk_off",
+			"cam3_mclk_on",
+			"cam3_mclk_off";
+
+	pinctrl-0 = <&camera_pins_default>;
+	pinctrl-1 = <&camera_pins_cam0_rst0>;
+	pinctrl-2 = <&camera_pins_cam0_rst1>;
+	pinctrl-3 = <&camera_pins_cam1_rst0>;
+	pinctrl-4 = <&camera_pins_cam1_rst1>;
+	pinctrl-5 = <&camera_pins_cam2_rst0>;
+	pinctrl-6 = <&camera_pins_cam2_rst1>;
+        pinctrl-7 = <&camera_pins_cam2_pnd0>;
+	pinctrl-8 = <&camera_pins_cam2_pnd1>;
+	pinctrl-9 = <&camera_pins_cam3_rst0>;
+	pinctrl-10 = <&camera_pins_cam3_rst1>;
+	pinctrl-11 = <&camera_pins_cam0_mclk_on>;
+	pinctrl-12 = <&camera_pins_cam0_mclk_off>;
+	pinctrl-13 = <&camera_pins_cam1_mclk_on>;
+	pinctrl-14 = <&camera_pins_cam1_mclk_off>;
+	pinctrl-15 = <&camera_pins_cam2_mclk_on>;
+	pinctrl-16 = <&camera_pins_cam2_mclk_off>;
+	pinctrl-17 = <&camera_pins_cam3_mclk_on>;
+	pinctrl-18 = <&camera_pins_cam3_mclk_off>;
+
+	/* back camera vreg */
+	cam0_vcama-supply = <&mt_pmic_vcama_ldo_reg>;
+	cam0_vcamd-supply = <&mt_pmic_vcamd_ldo_reg>;
+	cam0_vcamio-supply = <&mt_pmic_vcamio_ldo_reg>;
+	cam0_vcamaf-supply = <&mt_pmic_vldo28_ldo_reg>;
+
+	/* front camera vreg */
+	cam1_vcama-supply = <&mt_pmic_vcama_ldo_reg>;
+	cam1_vcamd-supply = <&mt_pmic_vcamd_ldo_reg>;
+	cam1_vcamio-supply = <&mt_pmic_vcamio_ldo_reg>;
+
+	/* back aux camera vreg */
+	cam2_vcama-supply = <&mt_pmic_vcama_ldo_reg>;
+	cam2_vcamio-supply = <&mt_pmic_vcamio_ldo_reg>;
+
+	/* sub2 wide camera vreg */
+	cam3_vcama-supply = <&mt_pmic_vcama_ldo_reg>;
+	cam3_vcamd-supply = <&mt_pmic_vcamd_ldo_reg>;
+	cam3_vcamio-supply = <&mt_pmic_vcamio_ldo_reg>;
+
+	cam0_enable_sensor = "hi1333_qtech ov13855_ofilm_tdk ov13855_ofilm s5k3l6_liteon hi1336_qtech imx258_sunny_zet imx258_sunny s5k3l6_truly";
+	cam1_enable_sensor = "s5k4h7_truly hi846_luxvisions hi846_ofilm gc8054_byd";
+	cam2_enable_sensor = "gc2375_sunny_mono gc2375_sunny ov02a10_foxconn ov02a10_sunwin";
+	cam3_enable_sensor = "s5k5e9yx_byd gc5035_luxvisions";
+
+	status = "okay";
+};
+
+/* flashlight-sgm3785 start */
+&pio {
+	flashlight_pins_default: flashlight_default {
+	};
+	/*torch_en*/
+	flashlight_pins_enm_low: enm_gpio@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO90__FUNC_GPIO90>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+
+	flashlight_pins_enm_high: enm_gpio@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO90__FUNC_GPIO90>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+	flashlight_pins_enm_pwm_low: enm_pwm@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO90__FUNC_PWM0>;
+			slew-rate = <1>;
+			bias-disable;
+		};
+	};
+	flashlight_pins_enm_pwm_high: enm_pwm@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO90__FUNC_PWM0>;
+			slew-rate = <1>;
+			bias-disable;
+		};
+	};
+
+	/*flash*/
+	flashlight_pins_enf_low: enf_gpio@0 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO6__FUNC_GPIO6>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+	flashlight_pins_enf_high: enf_gpio@1 {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO6__FUNC_GPIO6>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+};
+
+&flashlights_sgm3785 {
+	compatible = "mediatek,flashlights_sgm3785";
+	pinctrl-names = "flashlight_default",
+			"flashlight_enm_low",
+			"flashlight_enm_high",
+			"flashlight_enm_pwm_low",
+			"flashlight_enm_pwm_high",
+			"flashlight_enf_low",
+			"flashlight_enf_high";
+	pinctrl-0 = <&flashlight_pins_default>;
+	pinctrl-1 = <&flashlight_pins_enm_low>;
+	pinctrl-2 = <&flashlight_pins_enm_high>;
+	pinctrl-3 = <&flashlight_pins_enm_pwm_low>;
+	pinctrl-4 = <&flashlight_pins_enm_pwm_high>;
+	pinctrl-5 = <&flashlight_pins_enf_low>;
+	pinctrl-6 = <&flashlight_pins_enf_high>;
+	status = "okay";
+	decouple = <1>;
+	channel@1 {
+		type = <0>;
+		ct = <0>;
+		part = <0>;
+	};
+};
+/* flashlight-sgm3785 end */
+/* Camera end */

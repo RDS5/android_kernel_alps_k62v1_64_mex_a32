@@ -1,0 +1,12 @@
+&i2c6{
+  tas2557@4c {
+       #sound-dai-cells = <1>;
+        compatible = "ti,tas2557";
+        reg = <0x4c>;
+        ti,cdc-reset-gpio = <&pio 173 0>;
+        ti,irq-gpio = <&pio 7 0>;
+        ti,i2s-bits = <32>;   /* support 16, 24, 32 */
+        ti,bypass-tmax = <1>;   /* 0, not bypass; 1, bypass */
+        status = "okay";
+ };
+};

@@ -1,0 +1,28 @@
+/*************************************************************************************
+* ID_0: GPIO_EINT2 = GPIO2 *
+*************************************************************************************/
+
+&antenna_cable_detect {
+	pinctrl-names = "default", "idle";
+	pinctrl-0 = <&ant_cable_det_default>;
+	pinctrl-1 = <&ant_cable_det_idle>;
+	gpio_count = <1>;
+	debounce-interval = <15>;
+};
+
+&pio {
+	ant_cable_det_default: ant_cable_det_default {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO2__FUNC_GPIO2>;
+			slew-rate = <0>;
+			bias-disable;
+		};
+	};
+	ant_cable_det_idle: ant_cable_det_idle {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO2__FUNC_GPIO2>;
+			slew-rate = <0>;
+			bias-disable;
+		};
+	};
+};

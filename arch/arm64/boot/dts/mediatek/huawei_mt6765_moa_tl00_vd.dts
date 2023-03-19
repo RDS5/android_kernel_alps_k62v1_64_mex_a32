@@ -1,0 +1,28 @@
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/mt6765-pinfunc.h>
+#include <dt-bindings/clock/mt6765-clk.h>
+/dts-v1/;
+/plugin/;
+
+#include "huawei_common/huawei_common.dtsi"
+#include "huawei_mt6765_moa_tl00_vd/huawei.dtsi"
+
+&rootparam {
+    mtk,boardid = <4 4 8 5>;
+    mtk,board_name = "MOA_TL00_VD";
+    mtk,product_name = "MOA-TL00";
+    hardware_version = "HL1MEDM";
+};
+
+&antenna_boardid_detect {
+    expect_value = <2001>;
+};
+
+#include <k62v1_64_mex_a32/cust.dtsi>
+#include "huawei_mt6765_moa_tl00_vd/huawei-camera.dtsi"
+&i2c5 {
+	clock-frequency = <400000>;
+};
+/*End of this file, DO NOT ADD ANYTHING HERE*/
+

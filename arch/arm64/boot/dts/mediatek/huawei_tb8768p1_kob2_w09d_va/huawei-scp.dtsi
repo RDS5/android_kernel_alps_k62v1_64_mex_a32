@@ -1,0 +1,25 @@
+&huawei_scp_info {
+	compatible = "huawei,huawei_scp_info";
+	product_number = <1>;
+	status = "okay";
+};
+&i2c5 {
+	akm09918@0C {
+		status = "okay";
+		compatible = "mediatek,akm09918";
+		reg = <0x0c>;
+		i2c_num = <5>;
+		i2c_addr = <0x0C 0 0 0>;
+		direction = <6>;
+		is_batch_supported = <1>;
+	};
+	memsic@30 {
+		status = "okay";
+		compatible = "mediatek,mmc5603";
+		reg = <0x30>;
+		i2c_num = <5>;
+		i2c_addr = <0x30 0 0 0>;
+		direction = <5>;
+		is_batch_supported = <1>;
+	};
+};

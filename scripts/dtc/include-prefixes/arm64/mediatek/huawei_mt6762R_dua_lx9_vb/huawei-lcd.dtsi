@@ -1,0 +1,45 @@
+#include "../lcdkit3.0/dura/devkit_lcd_kit.dtsi"
+
+&huawei_lcd_panel {
+		compatible = "huawei,lcd_panel_type";
+		product_id = <1005>;
+		detect_type = <2>; /*0:DETECT_GPIOID  1:DETECT_CHIPID  2:DETECT_LCD_TYPE */
+		gpio_id = <169 178>; /*ID0 ID1*/
+		support_lcd_type = "LCD_KIT";
+		iovcc_ctrl_mode = <1>;
+};
+
+/* DISPSYS GPIO standardization */
+&pio {
+	mtkfb_pins_lcm_reset0: lcm_rst_out0_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO45__FUNC_GPIO45>;
+			slew-rate = <1>;
+			output-low;
+		};
+	};
+
+	mtkfb_pins_lcm_reset1: lcm_rst_out1_gpio {
+		pins_cmd_dat {
+			pinmux = <PINMUX_GPIO45__FUNC_GPIO45>;
+			slew-rate = <1>;
+			output-high;
+		};
+	};
+};
+
+&mtkfb {
+	pinctrl-names = "lcm_rst_out0_gpio", "lcm_rst_out1_gpio";
+	pinctrl-0 = <&mtkfb_pins_lcm_reset0>;
+	pinctrl-1 = <&mtkfb_pins_lcm_reset1>;
+	status = "okay";
+};
+
+&i2c5{
+	sm5109@3e {
+		compatible = "sm,sm5109";
+		reg = <0x3e>;
+		sm5109_i2c_bus_id = <5>;
+		sm5109_support = <1>;
+	};
+};

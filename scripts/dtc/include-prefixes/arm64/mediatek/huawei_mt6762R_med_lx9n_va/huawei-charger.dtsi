@@ -1,0 +1,105 @@
+&i2c5 {
+	rt9471@53 {
+		compatible = "richtek,rt9471";
+		status = "okay";
+		reg = <0x53>;
+		rt,intr_gpio = <&pio 11 0>;
+		rt,ceb_gpio = <&pio 154 0>;
+		charger_name = "rt9471";
+		rm-slave-addr = /bits/ 8 <0x53>;
+		rm-name = "rt9471";
+		interrupt-names = "wdt", "vac_ov", "otg_fault";
+		ichg = <1000>; /* mA */
+		aicr = <500>; /* mA */
+		mivr = <4400>; /* mV */
+		cv = <4400>; /* mV */
+		ieoc = <150>; /* mA */
+		safe-tmr = <20>; /* hour */
+		wdt = <40>; /* sec */
+		mivr-track = <0>;
+		en-safe-tmr;
+		en-te;
+		en-qon-rst;
+	};
+
+	sgm41511h@6b {
+		compatible = "huawei,sgm41511h_charger";
+		status = "okay";
+		reg = <0x6B>;
+		gpio_int = <&pio 11 0>;
+		gpio_cd = <&pio 154 0>;
+	};
+};
+
+&charger {
+	ac_charger_current = <2695000>;
+	ac_charger_input_current = <2300000>;
+	non_std_ac_charger_current = <1200000>;
+	dpm_enable;
+	dynamic_cv_en;
+	battery_cv = <4410000>;
+	iterm = <150000>;
+	jeita_temp_t2_to_t3_cv = <4410000>;
+	jeita_temp_t1_to_t2_cv = <4410000>;
+	jeita_temp_t0_to_t1_cv = <4410000>;
+	jeita_temp_t2_to_t3_cur = <2695000>;
+	vdpm_buf_limit = <100>;
+	vdpm_para =
+			"-32767", "4000", "4300", "50",
+			"4000", "4200", "4500", "50",
+			"4200", "32767", "4600", "50";
+};
+
+&huawei_charger {
+	compatible = "huawei,charger";
+	status = "okay";
+};
+
+&huawei_battery {
+	compatible = "huawei,battery";
+	voltage_max_design = <4410000>;
+	status = "okay";
+};
+
+&lk_charger{
+	ac_charger_current = <1050000>;
+	ac_charger_input_current = <1050000>;
+	non_std_ac_charger_current = <1050000>;
+	is_power_path;
+};
+
+&mt6370_pmu{
+	charger {
+		status = "disabled";
+	};
+};
+
+&otg_iddig {
+	interrupt-parent = <&pio>;
+	interrupts = <41 IRQ_TYPE_LEVEL_LOW 41 0>;
+	status = "okay";
+};
+
+&bat_gm30 {
+	bat_para =
+			"DeasyCoslight_137", "130000", "220000",
+			"ScudAtl", "250000", "350000",
+			"NvtAtl", "400000", "510000",
+			"DeasyCoslight_147", "590000", "690000",
+			"SwdByd", "830000", "960000";
+	batt_id_channel = <4>;
+	dlpt_optimization;
+	#include "../desay_coslight_137_4v40_4900mah_ext.dtsi"
+	#include "../scud_atl_4v40_4900mah_ext.dtsi"
+	#include "../nvt_atl_4v40_4900mah_ext.dtsi"
+	#include "../desay_coslight_147_4v43_4900mah_ext.dtsi"
+	#include "../sunwoda_byd_4v40_4900mah_ext.dtsi"
+};
+
+&usb_short_circuit_protect{
+	status = "okay";
+};
+
+&usb_phy_tuning {
+	status = "okay";
+};

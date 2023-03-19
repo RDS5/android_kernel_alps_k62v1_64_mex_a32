@@ -1,0 +1,7 @@
+source "drivers/huawei_platform/power/huawei_charger/Kconfig"
+source "drivers/huawei_platform/power/eta6937/Kconfig"
+source "drivers/huawei_platform/power/rt9471/Kconfig"
+source "drivers/huawei_platform/power/sgm41511h/Kconfig"
+source "drivers/huawei_platform/power/uscp/Kconfig"
+source "drivers/huawei_platform/power/rt9466/Kconfig"
+source "drivers/huawei_platform/power/pid_socket/Kconfig"

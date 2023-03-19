@@ -1,0 +1,189 @@
+&ts_kit {
+	status = "okay";
+	compatible = "huawei,ts_kit";	/* Do not change value*/
+	bus_type = "i2c";
+	product = "jakarta";
+	bus_id = <0>;
+	has_virtualkey = <0>;
+	debounce = <6 0>;
+	interrupt-parent = <&pio>;
+	interrupts = <0 2 0 0>;
+	aft_enable = <0>;		/* aft algo switch. 1 - enabel, 0 - disable*/
+	drv_stop_width = <0>;	/* always 0, can not config */
+	lcd_width = <0>;		/* always 0, can not config */
+	lcd_height = <0>;		/* always 0, can not config */
+	need_i2c_hwlock = <0>;	/* for i2c both used by ap and sensorhub */
+	register_charger_notifier = <0>;
+	hide_plain_id = <0>;
+
+	fts: touchscreen@38 {
+		compatible = "fts";
+
+		/* ts chip common config, parsed by paltform */
+		/* hardware config part */
+		slave_address = <0x38>;
+		irq_config = <3>;
+
+		/* base config */
+		projectid_len = <10>; /* default 10 */
+		ic_type = <2>;
+
+		/* power config part */
+		power_self_ctrl = <1>;
+		ts-kit-iovdd-type = <1>;
+		ts-kit-vcc-type = <1>;
+		ts-kit-iovdd-value = <1800000>;
+		ts-kit-vcc-value = <3000000>;
+		vddio_default_on = <1>;
+		ts-kit-iovdd-supply = <&mt_pmic_vs1_buck_reg>;  /* TODO:need parse by platform */
+		ts-kit-vcc-supply = <&mt_pmic_vldo28_ldo_reg>; /* TODO:need parse by platform */
+
+		/* pinctl config part */
+		pinctrl-names = "default", "state_eint_as_int", "state_eint_output0",
+			"state_eint_output1", "state_rst_output0", "state_rst_output1";
+		pinctrl-0 = <&ctp_pins_default>;
+		pinctrl-1 = <&ctp_pins_eint_as_int>;
+		pinctrl-2 = <&ctp_pins_eint_output0>;
+		pinctrl-3 = <&ctp_pins_eint_output1>;
+		pinctrl-4 = <&ctp_pins_rst_output0>;
+		pinctrl-5 = <&ctp_pins_rst_output1>;
+
+		/* input config part */
+		x_max = <720>;
+		y_max = <1560>;
+		x_max_mt = <720>;
+		y_max_mt = <1560>;
+		flip_x = <1>;
+		flip_y = <1>;
+
+		/* feature config part */
+		parade,is_parade_solution = <0>;
+		parade,direct_proc_cmd = <0>;
+		parade,sleep_in_mode = <0>;
+		roi_supported = <0>;
+		glove_supported = <0>;
+		holster_supported = <0>;
+		pen_support = <0>;
+		support_3d_func = <0>;
+		charger_supported = <0>;
+		check_bulcked = <0>;
+		support_aft = <0>;
+		use_lcdkit_power_notify = <1>;
+		fp_tp_report_touch_minor_event = <0>;
+		algo_id = <1>; /* 0 - not use driver algo 1 - algo t1 */
+		need_wd_check_status = <0>;
+		check_status_watchdog_timeout = <0>;
+		touch_switch_flag = <2>;
+		get_brightness_info_flag = <0>;
+		has_virtualkey = <0>;
+		lcd_full = <0>;
+		provide_panel_id_support = <1>;
+		chip_id = <0x54>;
+		hard_reset_delay = <200>;
+		erase_min_delay = <1350>;
+		calc_crc_delay = <300>;
+		reboot_delay = <300>;
+		erase_query_delay = <50>;
+		write_flash_query_times = <30>;
+		read_ecc_query_times = <100>;
+		erase_flash_query_times = <15>;
+		upgrade_loop_times = <5>;
+		pram_projectid_addr = <0xd7a0>;
+		rawdata_newformatflag = <1>;
+		fts,fw_only_depend_on_lcd = <0>;
+		fts,need_distinguish_lcd = <1>;
+		only_open_once_captest_threshold = <1>;
+		jaka53020{
+			producer = "truly";
+			ic_type = <2>;
+			compatible = "fts-jaka53020";
+			row_column_delta_test = <0>;
+			lcd_noise_data_test = <1>;
+			threshold,point_by_point_judge = <1>;
+			row_column_delta_test_point_by_point = <1>;
+			threshold,in_csv_file = <1>;
+			provide_panel_id_suppot = <1>;
+		};
+	};
+	goodix_kit: ts_kit@14 {
+		compatible = "gt1x";
+		algo_id = <1>;
+		projectid_len = <10>; /* default 10 */
+
+		/* pinctl config part */
+		pinctrl-names = "default", "state_eint_as_int", "state_eint_output0",
+			"state_eint_output1", "state_rst_output0", "state_rst_output1";
+		pinctrl-0 = <&ctp_pins_default>;
+		pinctrl-1 = <&ctp_pins_eint_as_int>;
+		pinctrl-2 = <&ctp_pins_eint_output0>;
+		pinctrl-3 = <&ctp_pins_eint_output1>;
+		pinctrl-4 = <&ctp_pins_rst_output0>;
+		pinctrl-5 = <&ctp_pins_rst_output1>;
+
+		/* input config part */
+		x_max = <720>;
+		y_max = <1560>;
+		x_max_mt = <720>;
+		y_max_mt = <1560>;
+		flip_x = <1>;
+		flip_y = <1>;
+
+		/* power config part */
+		power_self_ctrl = <1>;
+		ts-kit-iovdd-type = <1>;
+		ts-kit-vcc-type = <1>;
+		ts-kit-iovdd-value = <1800000>;
+		ts-kit-vcc-value = <3000000>;
+		vddio_default_on = <1>;
+		ts-kit-iovdd-supply = <&mt_pmic_vs1_buck_reg>;  /* TODO:need parse by platform */
+		ts-kit-vcc-supply = <&mt_pmic_vldo28_ldo_reg>; /* TODO:need parse by platform */
+
+		slave_address = <0x14>;
+		irq_config = <3>;/* 0 - LOW LEVEL  1 - HIGH LEVEL  2 - RAISE EDGE  3 - FALL EDGE*/
+
+		roi_data_size = <7 7>; /* row and colume*/
+		project_id = "JAKA54000";
+		chip_name = "1158"; /* GT1151Q */
+		module_vendor = "ofilm";
+
+		touch_switch_flag = <2>;
+		rawdata_newformatflag = <1>;
+		/* feature config part */
+		parade,is_parade_solution = <0>;
+		parade,direct_proc_cmd = <0>;
+		parade,sleep_in_mode = <0>;
+		roi_supported = <0>;
+		glove_supported = <0>;
+		holster_supported = <0>;
+		pen_support = <0>;
+		support_3d_func = <0>;
+		charger_supported = <0>;
+		check_bulcked = <0>;
+		support_aft = <0>;
+		tools_support = <1>; /* support GTP tools APK ,0:no support; 1: support*/
+		easy_wakeup_supported = <0>;
+		ic_type = <0>; /* 0: 9PT, 1: 9P*/
+		gt1x_test_limit = <1>;
+		use_lcdkit_power_notify = <1>;
+		support_get_tp_color = <0>;
+		only_open_once_captest_threshold = <1>;
+		provide_panel_id_support = <1>;
+		fw_only_depend_on_lcd = <1>;
+		gt1x_edge_add = <0x81A1>;
+		gt1x_support_edge_xyer = <1>;
+		SENSORID1 {
+			compatible = "gt1x-sensorid-1";
+			panel_id = <1>;
+			module_vendor = "eely";
+			provide_panel_id_suppot = <1>;
+			project_id = "JAKA54010";
+		};
+		SENSORID0 {
+			compatible = "gt1x-sensorid-0";
+			panel_id = <0>;
+			module_vendor = "ofilm";
+			provide_panel_id_suppot = <1>;
+			project_id = "JAKA54000";
+		};
+	};
+};

@@ -1,0 +1,8 @@
+#
+# Misc strange devices
+#
+config CS35L41
+	tristate "Cirrus Logic C35L41 Amplifier misc driver"
+	depends on SPI_MASTER
+	select  REGMAP_SPI
+

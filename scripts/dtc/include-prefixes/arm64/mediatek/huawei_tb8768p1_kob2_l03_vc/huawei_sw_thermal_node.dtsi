@@ -1,0 +1,85 @@
+/* shell thermal config and algorithm AR000AFR67 */
+&hisi_shell {
+	compatible = "hisi,shell-temp";
+	interval = <5000>;
+	bias = <500912>;
+	count = <7>;
+	tsensor_para = "10000","100000","0";
+	ntc_para = "2000","80000","-20000";
+	status = "ok";
+	sensors {
+		sensor0 {
+			type = "msm_therm";
+			coef = "1215","655","198","468","2617","1959","16398";
+		};
+		sensor1 {
+			type = "pa_therm0";
+			coef = "4045","492","813","231","-895","-1911","-17654";
+		};
+		sensor2 {
+			type = "battery";
+			coef = "857000","6407000","15901000","17728000","24706000","26262000","51406000";
+		};
+		sensor3 {
+			type = "COOL_THERM";
+			coef = "-15155","-8338","-9332","-10193","-9578","-9750","-17546";
+		};
+	};
+};
+
+&shell_front {
+	compatible = "hisi,shell-temp";
+	interval = <5000>;
+	bias = <495418>;
+	count = <7>;
+	tsensor_para = "10000","100000","0";
+	ntc_para = "2000","80000","-20000";
+	status = "ok";
+	sensors {
+		sensor0 {
+			type = "msm_therm";
+			coef = "-437","978","386","-513","312","-988","-1731";
+		};
+		sensor1 {
+			type = "pa_therm0";
+			coef = "-764","-194","-528","-1024","13","2062","11296";
+		};
+		sensor2 {
+			type = "battery";
+			coef = "-1015000","-1242000","6517000","8203000","16753000","19570000","41288000";
+		};
+		sensor3 {
+			type = "COOL_THERM";
+			coef = "89","-2487","-2948","-2735","-4027","-3332","-7108";
+		};
+	};
+};
+
+&shell_back {
+	compatible = "hisi,shell-temp";
+	interval = <5000>;
+	bias = <288965>;
+	count = <7>;
+	tsensor_para = "10000","100000","0";
+	ntc_para = "2000","80000","-20000";
+	status = "ok";
+	sensors {
+		sensor0 {
+			type = "msm_therm";
+			coef = "7868","3090","4798","3558","3045","2862","8174";
+		};
+		sensor1 {
+			type = "pa_therm0";
+			coef = "1987","91","-203","129","-471","-224","-3469";
+		};
+		sensor2 {
+			type = "battery";
+			coef = "21575000","11398000","11074000","7645000","8745000","6943000","12791000";
+		};
+		sensor3 {
+			type = "COOL_THERM";
+			coef = "-3357","-2356","-3050","-3876","-3868","-3954","-6246";
+		};
+	};
+};
+

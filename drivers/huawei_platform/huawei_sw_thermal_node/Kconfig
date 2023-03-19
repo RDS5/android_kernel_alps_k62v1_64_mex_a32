@@ -1,0 +1,6 @@
+# add four node for huawei thermal checking AR000AFR67
+config HUAWEI_THERMAL_HWNODE
+    tristate "Huawei Kernel State"
+    default n
+    help
+        Huawei kernel state, please choose it.

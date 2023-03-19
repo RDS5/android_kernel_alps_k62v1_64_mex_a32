@@ -1,0 +1,5 @@
+/* Camera start */
+#include "huawei-tb8768p1_64_a32-camera.dtsi"
+&product_name_camera {
+	product-name = "Kobe2Cam";
+};

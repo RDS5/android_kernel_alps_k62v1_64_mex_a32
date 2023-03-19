@@ -1,0 +1,113 @@
+&i2c5 {
+	rt-swchg@53 {
+		compatible = "richtek,swchg";
+		reg = <0x53>;
+		status = "okay";
+		rt9466 {
+			rt,ceb_gpio = <&pio 154 0>;
+			rt,ceb_gpio_num = <154>;
+			rt,intr_gpio = <&pio 11 0>;
+			rt,intr_gpio_num = <11>; /* direct defined GPIO num */
+			interrupt-names = "wdtmri", "chg_mivr", "chg_aiclmeasi",
+				"chg_statci";
+			status = "okay";
+			charger_name = "primary_chg";
+			ichg = <1000000>; /* uA */
+			aicr = <500000>; /* uA */
+			mivr = <4700000>; /* uV */
+			cv = <4400000>; /* uV */
+			ieoc = <150000>; /* uA */
+			safety_timer = <20>; /* hour */
+			ircmp_resistor = <80000>; /* uohm */
+			ircmp_vclamp = <96000>; /* uV */
+			en-safe-tmr;
+			en_te;
+			en_wdt;
+		};
+
+		rt9471 {
+			rt,ceb_gpio = <&pio 154 0>;
+			rt,intr_gpio_num = <11>; /* direct defined GPIO num */
+			rt,intr_gpio = <&pio 11 0>; /* GPIO */
+			charger_name = "rt9471";
+			rm-slave-addr = /bits/ 8 <0x53>;
+			rm-name = "rt9471";
+			interrupt-names = "wdt", "vac_ov", "otg_fault";
+			ichg = <1000>; /* mA */
+			aicr = <500>; /* mA */
+			mivr = <4700>; /* mV */
+			cv = <4400>; /* mV */
+			ieoc = <150>; /* mA */
+			safe-tmr = <20>; /* hour */
+			wdt = <40>; /* sec */
+			mivr-track = <0>;
+			en-safe-tmr;
+			en-te;
+			en-qon-rst;
+		};
+	};
+
+	sgm41511h@6b {
+		compatible = "huawei,sgm41511h_charger";
+		status = "okay";
+		reg = <0x6B>;
+		gpio_int = <&pio 11 0>;
+		gpio_cd = <&pio 154 0>;
+		custom_cv = <4400>;
+	};
+};
+
+&charger {
+	ac_charger_current = <1500000>;
+	ac_charger_input_current = <1000000>;
+	non_std_ac_charger_current = <1100000>;
+	dpm_enable;
+	vdpm_buf_limit = <100>;
+	vdpm_para =
+			"-32767", "4000", "4200", "50",
+			"4000", "4200", "4400", "50",
+			"4200", "32767", "4600", "50";
+};
+
+&huawei_charger {
+	compatible = "huawei,charger";
+	status = "okay";
+};
+
+&lk_charger{
+	ac_charger_current = <1000000>;
+	ac_charger_input_current = <1000000>;
+	non_std_ac_charger_current = <1050000>;
+};
+
+&mt6370_pmu{
+	charger {
+		status = "disabled";
+	};
+};
+
+&otg_iddig {
+	interrupt-parent = <&pio>;
+	interrupts = <41 IRQ_TYPE_LEVEL_LOW 41 0>;
+	otg_bigcurr_disable;
+	status = "okay";
+};
+
+&bat_gm30 {
+	bat_para =
+			"ScudAtl", "236000", "351000",
+			"DesayByd", "828000", "972000";
+	batt_id_channel = <4>;
+	#include "../scud_atl_4v40_4980mah_ext.dtsi"
+	#include "../desay_byd_4v40_4980mah_ext.dtsi"
+};
+
+&usb_phy_tuning {
+	d_u2_vrt_ref = <7>;
+	d_u2_term_ref = <2>;
+	d_u2_enhance = <3>;
+	h_u2_vrt_ref = <7>;
+	h_u2_term_ref = <3>;
+	h_u2_enhance = <2>;
+	status = "okay";
+};

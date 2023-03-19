@@ -1,0 +1,32 @@
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/mt6765-pinfunc.h>
+#include <dt-bindings/clock/mt6765-clk.h>
+/dts-v1/;
+/plugin/;
+
+#include "huawei_common/huawei_common.dtsi"
+#include "huawei_mt6762R_med_lx9n_va/huawei.dtsi"
+
+&rootparam {
+    mtk,boardid = <4 4 7 1>;
+    mtk,board_name = "MED_LX9N_VA";
+    mtk,product_name = "MED-LX9N";
+    hardware_version = "HL5MEDM";
+};
+
+&antenna_boardid_detect {
+    expect_value = <2000>;
+};
+
+&dev_detect{
+    nfc = <1>;
+};
+
+#include <k62v1_64_mex_a32/cust.dtsi>
+#include "huawei_mt6762R_med_lx9n_va/huawei-camera.dtsi"
+&i2c5 {
+	clock-frequency = <400000>;
+};
+/*End of this file, DO NOT ADD ANYTHING HERE*/
+

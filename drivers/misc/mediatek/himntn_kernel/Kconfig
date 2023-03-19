@@ -1,0 +1,16 @@
+config HIMNTN_FEATURE_SUPPORT
+	bool "himntn feature switch"
+	default n
+	help
+	  himntn feature is used to control maintenance,
+	  which can be correct partition value in kernel phase.
+	  you should set in project configure file.
+
+config MTK_HIMNTN_FEATURE
+	bool "mtk platform feature switch"
+	default n
+	depends on HIMNTN_FEATURE_SUPPORT
+	help
+	  this feature indicates that it is unique to MTK,
+	  which can be used to control MTK feature in kernel phase.
+	  you should set in project configure file.

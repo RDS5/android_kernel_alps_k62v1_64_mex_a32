@@ -1,0 +1,22 @@
+#=============================================================================
+#  add new config for devices check
+#  add new config for factory cmdline parse
+#  add new config for antenna board gpio match
+#=============================================================================
+
+menu "Huawei Platform Drivers"
+source "drivers/huawei_platform/hw_kstate/Kconfig"
+source "drivers/huawei_platform/antenna_board_gpio_match/Kconfig"
+source "drivers/huawei_platform/audio/Kconfig"
+source "drivers/huawei_platform/sensors/Kconfig"
+source "drivers/huawei_platform/antenna_cable/Kconfig"
+
+# shell thermal config and algorithm AR000AFR67
+source "drivers/huawei_platform/huawei_sw_thermal_node/Kconfig"
+source "drivers/huawei_platform/sensor/Kconfig"
+source "drivers/huawei_platform/ioinfo/Kconfig"
+source "drivers/huawei_platform/power/Kconfig"
+source "drivers/huawei_platform/pmeminfo/Kconfig"
+source "drivers/huawei_platform/card_tray/Kconfig"
+source "drivers/huawei_platform/virt_to_phys/Kconfig"
+endmenu

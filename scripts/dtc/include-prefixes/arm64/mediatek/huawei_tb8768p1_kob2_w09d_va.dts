@@ -1,0 +1,38 @@
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/pinctrl/mt6765-pinfunc.h>
+#include <dt-bindings/clock/mt6765-clk.h>
+/dts-v1/;
+/plugin/;
+
+#include "huawei_common/huawei_common.dtsi"
+#include "huawei_tb8768p1_kob2_w09d_va/huawei.dtsi"
+
+&rootparam {
+    mtk,boardid = <4 4 3 7>;
+    mtk,board_name = "KOB2_W09D_VA";
+    mtk,product_name = "KOB2-W09D";
+    hardware_version = "SH1KOBE2M02";
+};
+
+&singleap_wifionly {
+    compatible = "singleap,wifionly";
+    status = "okay";
+    is_wifionly = "1";
+};
+
+&antenna_boardid_detect {
+    expect_value = <2129>;
+};
+
+&card_tray_detect {
+    card_tray_gpio = <376>;
+};
+
+#include <tb8768p1_64_a32/cust.dtsi>
+#include "huawei_tb8768p1_kob2_w09d_va/huawei-camera.dtsi"
+&i2c5 {
+	clock-frequency = <400000>;
+};
+/*End of this file, DO NOT ADD ANYTHING HERE*/
+

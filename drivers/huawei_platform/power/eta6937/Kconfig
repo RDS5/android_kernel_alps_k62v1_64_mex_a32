@@ -1,0 +1,3 @@
+config ETA6937_CHARGER
+        bool "eta6937 charger"
+        default n

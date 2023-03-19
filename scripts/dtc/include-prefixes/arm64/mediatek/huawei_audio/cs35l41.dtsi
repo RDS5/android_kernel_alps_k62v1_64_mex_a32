@@ -1,0 +1,33 @@
+/* Speaker */
+&spi3 {
+	cs35l41: cs35l41@0 {
+		compatible = "cirrus,cs35l41";
+	    reg = <0>;
+	    spi-max-frequency = <5000000>;
+		reset-gpios = <&pio 173 0>;
+		irq-gpios = <&pio 7 0>;
+		/*VA-supply = <&pm8998_s4>;*/
+		/*VP-supply = <&audio_vsys>;*/
+		cirrus,boost-peak-milliamp = <4500>;
+	    cirrus,boost-ind-nanohenry = <1000>;
+	    cirrus,boost-cap-microfarad = <15>;
+		status = "okay";
+
+		cirrus,pll-refclk-sel = <0x0>;
+		cirrus,pll-refclk-freq = <0x21>;
+
+		cirrus,gpio-config2 {
+			cirrus,gpio-src-select = <0x5>;
+			cirrus,gpio-output-enable;
+		};
+
+		cirrus,asp-config {
+			cirrus,asp-rx-wl = <0x10>;
+			cirrus,asp-rx-width = <0x20>;
+			cirrus,asp-fmt = <0x2>;
+			cirrus,asp-srate = <0x3>;
+		};
+
+	};
+};
+

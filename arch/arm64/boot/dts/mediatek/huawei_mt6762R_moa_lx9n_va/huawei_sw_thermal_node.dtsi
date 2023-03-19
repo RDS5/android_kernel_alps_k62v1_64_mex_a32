@@ -1,0 +1,85 @@
+/* shell thermal config and algorithm AR000AFR67 */
+&hisi_shell {
+        compatible = "hisi,shell-temp";
+        interval = <5000>;
+        bias = <454434>;
+        count = <7>;
+        tsensor_para = "10000","100000","0";
+        ntc_para = "2000","80000","-20000";        
+        status = "ok";
+        sensors {
+            sensor0 {
+                type = "msm_therm";     /* board temp == system_h */
+                coef = "-5329","-2121","-1256","-1249","-1294","-1726","5597";
+            };
+            sensor1 {
+                type = "pa_therm0";       /* PA temp == pa_0 */
+                coef = "5421","1673","645","1062","-264","2181","12330";
+            };
+            sensor2 {
+                type = "battery";             /* battery temp */
+                coef = "-2670000","-303000","2197000","5694000","10177000","15481000","21009000";
+            };
+            sensor3 {
+                type = "pmic_xo_therm";  /* charger ic therm */
+                coef = "375","2205","1330","1860","1037","1905","7434";
+            };
+        };
+    };
+
+&shell_front {
+        compatible = "hisi,shell-temp";
+        interval = <5000>;
+        bias = <461905>;
+        count = <7>;
+        tsensor_para = "10000","100000","0";
+        ntc_para = "2000","80000","-20000";
+        status = "ok";
+        sensors {
+            sensor0 {
+                type = "msm_therm";     /* board temp == system_h */
+                coef = "13839","7188","4910","4752","4898","7974","22658";
+            };
+            sensor1 {
+                type = "pa_therm0";       /* PA temp == pa_0 */
+                coef = "3401","-1393","-2655","-1303","-2453","-3087","-3488";
+            };
+            sensor2 {
+                type = "battery";             /* battery temp */
+                coef = "3148000","3460000","3174000","3917000","5655000","7778000","10479000";
+            };
+            sensor3 {
+                type = "pmic_xo_therm";  /* charger ic therm */
+                coef = "-4103","-1626","-1916","-1053","-2513","-1470","2177";
+            };
+        };
+    };
+
+&shell_back {
+        compatible = "hisi,shell-temp";
+        interval = <3000>;
+        bias = <0>;
+        count = <7>;
+        tsensor_para = "10000","100000","0";
+        ntc_para = "2000","80000","-20000";
+        status = "ok";
+        sensors {
+            sensor0 {
+                type = "msm_therm";     /* board temp == system_h */
+                coef = "-11361","-7407","-7101","-9514","-9600","-13518","-24477";
+            };
+            sensor1 {
+                type = "pa_therm0";       /* PA temp == pa_0 */
+                coef = "11219","911","-9","-2579","-3381","-2856","-4858";
+            };
+            sensor2 {
+                type = "battery";             /* battery temp */
+                coef = "55900000","42923000","30182000","17842000","3799000","-8551000","-21506000";
+            };
+            sensor3 {
+                type = "pmic_xo_therm";  /* charger ic therm */
+                coef = "10667","6910","3579","6727","6071","10571","17703";
+            };
+        };
+    };
+

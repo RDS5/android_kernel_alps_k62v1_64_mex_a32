@@ -1,0 +1,14 @@
+menu "Audio configuration"
+config HUAWEI_AUDIO
+        bool "Audio support"
+        default n
+        select REGMAP_I2C
+        help
+          Enable support for audio
+if HUAWEI_AUDIO
+source "drivers/huawei_platform/audio/cs35l41/Kconfig"
+source "drivers/huawei_platform/audio/tas2557/Kconfig"
+source "drivers/huawei_platform/audio/tfa9894/Kconfig"
+source "drivers/huawei_platform/audio/hs_auto_calib/Kconfig"
+endif # if HUAWEI_AUDIO
+endmenu

@@ -1,0 +1,3 @@
+config SGM41511H_CHARGER
+        bool "sgm41511h charger"
+        default n

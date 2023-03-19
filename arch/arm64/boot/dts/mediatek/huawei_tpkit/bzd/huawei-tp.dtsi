@@ -1,0 +1,129 @@
+/* ts kit */
+&ts_kit {
+	status = "okay";
+	compatible = "huawei,ts_kit"; /* Do not change value*/
+	bus_type = "i2c";
+	product = "kob2";
+	bus_id = <0>;
+	has_virtualkey = <0>;
+	debounce = <6 0>;
+	interrupt-parent = <&pio>;
+	interrupts = <0 2 0 0>;
+	aft_enable = <0>; /* aft algo switch. 1 - enabel, 0 - disable*/
+	drv_stop_width = <0>; /* always 0, can not config */
+	lcd_width = <0>; /* always 0, can not config */
+	lcd_height = <0>; /* always 0, can not config */
+	need_i2c_hwlock = <0>; /* for i2c both used by ap and sensorhub */
+	register_charger_notifier = <0>;
+	hide_plain_id = <1>;
+	fts: touchscreen@38 {
+		compatible = "fts";
+
+		/* ts chip common config, parsed by paltform */
+		/* hardware config part */
+		slave_address = <0x38>;
+		irq_config = <3>;
+
+		/* base config */
+		projectid_len = <10>; /* default 10 */
+		ic_type = <4>;
+		is_in_cell = <1>;
+
+		/* power config part */
+		power_self_ctrl = <0>;
+		/* ts-kit-iovdd-type = <1>; */
+		/* ts-kit-vcc-type = <1>; */
+		/* ts-kit-iovdd-value = <1800000>; */
+		/* ts-kit-vcc-value = <3000000>; */
+		/* vddio_default_on = <1>; */
+		/* ts-kit-iovdd-supply = <&mt_pmic_vs1_buck_reg>; */ /* TODO:need parse by platform */
+		/* ts-kit-vcc-supply = <&mt_pmic_vldo28_ldo_reg>; */ /* TODO:need parse by platform */
+
+		/* pinctl config part */
+		pinctrl-names = "default", "state_eint_as_int", "state_eint_output0",
+			"state_eint_output1", "state_rst_output0", "state_rst_output1";
+		pinctrl-0 = <&ctp_pins_default>;
+		pinctrl-1 = <&ctp_pins_eint_as_int>;
+		pinctrl-2 = <&ctp_pins_eint_output0>;
+		pinctrl-3 = <&ctp_pins_eint_output1>;
+		pinctrl-4 = <&ctp_pins_rst_output0>;
+		pinctrl-5 = <&ctp_pins_rst_output1>;
+
+		/* input config part */
+		x_max = <800>;
+		y_max = <1280>;
+		x_max_mt = <800>;
+		y_max_mt = <1280>;
+		flip_x = <1>;
+		flip_y = <1>;
+
+		/* feature config part */
+		parade,is_parade_solution = <0>;
+		parade,direct_proc_cmd = <0>;
+		parade,sleep_in_mode = <0>;
+		roi_supported = <0>;
+		glove_supported = <0>;
+		holster_supported = <0>;
+		pen_support = <0>;
+		support_3d_func = <0>;
+		charger_supported = <0>;
+		check_bulcked = <0>;
+		support_aft = <0>;
+		use_lcdkit_power_notify = <1>;
+		fp_tp_report_touch_minor_event = <0>;
+		algo_id = <1>; /* 0 - not use driver algo 1 - algo t1 */
+		need_wd_check_status = <0>;
+		check_status_watchdog_timeout = <0>;
+		touch_switch_flag = <0>;
+		get_brightness_info_flag = <0>;
+		has_virtualkey = <0>;
+		lcd_full = <0>;
+		provide_panel_id_support = <1>;
+		chip_id = <80>;
+		hard_reset_delay = <200>;
+		erase_min_delay = <1350>;
+		calc_crc_delay = <300>;
+		reboot_delay = <300>;
+		erase_query_delay = <50>;
+		write_flash_query_times = <30>;
+		read_ecc_query_times = <100>;
+		erase_flash_query_times = <15>;
+		upgrade_loop_times = <5>;
+		rawdata_get_timeout = <10>;
+		pram_projectid_addr = <0xfa0>;
+		fts,fw_only_depend_on_lcd = <0>;
+		fts,need_distinguish_lcd = <0>;
+		print_all_trx_diffdata_for_newformat_flag = <0>; /* num = tx * rx */
+		only_open_once_captest_threshold = <0>;
+		is_ic_rawdata_proc_printf = <1>;
+		support_point_to_point_test = <1>;
+		capa_test_sequence = <1>; /* Change the capacity test sequence, only for kob2 */
+		tddi_tp_reset_sync = <1>;
+		W181751300{
+			producer = "boe";
+			ic_type = <4>;
+			compatible = "fts-W181751300";
+			threshold,in_csv_file = <1>;
+			threshold,raw_data_min = <200>;
+			threshold,raw_data_max = <10692>;
+			threshold,cb_test_min = <0>;
+			threshold,cb_test_max = <255>;
+			threshold,short_circuit_min = <10>;
+			threshold,open_test_cb_min = <0>;
+			threshold,lcd_noise_max = <5000>;
+		};
+		W181751200{
+			producer = "cmi";
+			ic_type = <4>;
+			compatible = "fts-W181751200";
+			threshold,in_csv_file = <1>;
+			threshold,raw_data_min = <200>;
+			threshold,raw_data_max = <10692>;
+			threshold,cb_test_min = <0>;
+			threshold,cb_test_max = <255>;
+			threshold,short_circuit_min = <10>;
+			threshold,open_test_cb_min = <0>;
+			threshold,lcd_noise_max = <5000>;
+		};
+	};
+};
